@@ -3,8 +3,8 @@
   <div id="app">
     {{ message }}
 
-    <input placeholder="Put in a number to cube" v-model="toCube" />
-    {{ toCube ** 3 }}
+    <input placeholder="Put in a number to cube" v-model="numberInput" />
+    {{ squared }}
   </div>
 </html>
 
@@ -14,7 +14,12 @@
     el: "#app",
     data: {
       message: "Hello Vue!",
-      toCube: 0,
+      numberInput: 0,
+    },
+    computed: {
+      squared() {
+        return this.numberInput ** 2;
+      },
     },
   });
 </script>
