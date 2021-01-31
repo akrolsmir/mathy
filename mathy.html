@@ -5,6 +5,17 @@
 
     <input placeholder="Put in a number to cube" v-model="numberInput" />
     {{ squared }}
+
+    <br />
+    <textarea v-model="playersString"></textarea>
+    <div v-for="player in players">*{{ player }}</div>
+
+    <div v-for="(pairing, i) in pairings">
+      #{{ i + 1 }}:
+      <input v-model="pairings[i]" />
+    </div>
+
+    {{ pairingsSummed }}
   </div>
 </html>
 
@@ -13,12 +24,21 @@
   var app = new Vue({
     el: "#app",
     data: {
+      playersString: "", // Comma-separated list of players, eg. "Austin, Derek, Joanne, Sinclair"
       message: "Hello Vue!",
       numberInput: 0,
+      rounds: 3,
+      pairings: Array(3).fill("dummy"),
     },
     computed: {
       squared() {
         return this.numberInput ** 2;
+      },
+      pairingsSummed() {
+        return this.pairings.join(" -- ");
+      },
+      players() {
+        return this.playersString.split(", ");
       },
     },
   });
