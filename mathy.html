@@ -1,0 +1,20 @@
+<html>
+  <h1>Hello World</h1>
+  <div id="app">
+    {{ message }}
+
+    <input placeholder="Put in a number to cube" v-model="toCube" />
+    {{ toCube ** 3 }}
+  </div>
+</html>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<script>
+  var app = new Vue({
+    el: "#app",
+    data: {
+      message: "Hello Vue!",
+      toCube: 0,
+    },
+  });
+</script>
