@@ -10,6 +10,11 @@
     <textarea v-model="playersString"></textarea>
     <div v-for="player in players">*{{ player }}</div>
 
+    <div v-for="[player1, player2] in pairedPlayers">
+      {{ player1 }} vs {{ player2 }}
+    </div>
+    <button @click="addPlayers">Add 2 new players to playersString</button>
+
     <div v-for="(pairing, i) in pairings">
       #{{ i + 1 }}:
       <input v-model="pairings[i]" />
@@ -24,11 +29,16 @@
   var app = new Vue({
     el: "#app",
     data: {
-      playersString: "", // Comma-separated list of players, eg. "Austin, Derek, Joanne, Sinclair"
+      playersString: "Austin, Derek, Joanne, Sinclair", // Comma-separated list of players
       message: "Hello Vue!",
       numberInput: 0,
       rounds: 3,
       pairings: Array(3).fill("dummy"),
+    },
+    methods: {
+      addPlayers() {
+        this.playersString += ", Shawn, Eric";
+      },
     },
     computed: {
       squared() {
@@ -39,6 +49,14 @@
       },
       players() {
         return this.playersString.split(", ");
+      },
+      pairedPlayers() {
+        const result = [];
+        // Retuns a list of length 2 lists: [["Austin", "Derek"] , ["Joanne", "Sinclair"]]
+        for (let i = 0; i < this.players.length; i += 2) {
+          result.push([this.players[i], this.players[i + 1]]);
+        }
+        return result;
       },
     },
   });
